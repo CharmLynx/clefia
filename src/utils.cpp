@@ -1,15 +1,19 @@
 #include <string>     
 #include <sstream>     
 #include <iomanip>    
-#include <cstdint>      
+#include <cstdint>   
+#include <iostream>
+#include <cmath>
+
+using namespace std;
 
 void hex_to_bytes(const string& hex_string, uint64_t digits[], int& count){
 
     int hex_length = hex_string.length();
-    int padding = 8-(hex_length%8);
     string text = hex_string;
-    if(padding!=0){
-        text = string(padding, '0')+ text;
+    if(hex_length%8!=0){
+        int padding=8-(hex_length%8);
+        text=string(padding, '0')+text;
     }
     int text_length = text.length();
     string part(8,'0');
