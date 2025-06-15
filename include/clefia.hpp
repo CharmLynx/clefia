@@ -1,5 +1,10 @@
 #pragma once
 #include <cstdint>
+#include <cstddef>
+#include <string>
+#include <vector>
+
+using namespace std;
 
 namespace clefia{
 
@@ -20,7 +25,9 @@ struct CipherParameters{
 
 CipherParameters get_params(KeyLength length);
 
-void EncryptBlock(const Byte plaintext[16], Byte ciphertext[16], const Byte key[], KeyLength keyLen);
-void DecryptBlock(const Byte ciphertext[16], Byte plaintext[16], const Byte key[], KeyLength keyLen);
+void EncryptBlock(const Byte plaintext[16], Byte ciphertext[16], const Word kw[4], const Word rk[], int rounds);
+void DecryptBlock(const Byte ciphertext[16], Byte plaintext[16], const Word kw[4], const Word rk[], int rounds);
+void EncryptText(const string& hex_plain, const Word kw[4], const vector<Word>& rk, int rounds);
+void DecryptText(const string& hex_cipher, const Word kw[4], const vector<Word>& rk, int rounds);
 
 }
